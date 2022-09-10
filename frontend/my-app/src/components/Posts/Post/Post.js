@@ -34,11 +34,10 @@ const Post = ({ post, setCurrentId }) => {
             <CardActions className={classes.cardActions}>
                 {console.log("poster", post?.result)}
                 <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))} ><ThumbUpAltIcon fontSize="small" /> Like {post.like}0 </Button>
-                {/* {(post?.result?.googleId === post?.creator || post?.result?._id === post?.creator) && ( */}
-                
-                <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button>
-                {/* )} */}
-                {/* <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button> */}
+                {(post?.result?.googleId === post?.creator || post?.result?._id !== post?.creator) && (
+                <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}><DeleteIcon fontSize="small" /> Delete</Button>)}
+               
+               
             </CardActions>
         </Card>
     );

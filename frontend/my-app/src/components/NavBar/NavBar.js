@@ -17,6 +17,9 @@ const NavBar = () => {
     console.log("userPresent", user);
 
     useEffect(() => {
+        const token = user?.token;
+        
+
         setUser(JSON.parse(localStorage.getItem("profile")));
     }, [location]);
 
@@ -37,15 +40,10 @@ const NavBar = () => {
                 <Toolbar className={classes.toolbar}>
                     {user ? (
                         <div className={classes.profile}>
-                            <Avatar className={classes.purple} alt={user.token.name} src={user.token.picture}>
-                                {
-                                    // user.result.email[0]
-                                }
-                                {/* {user.result.name.charAt(0)} */}
-                                {/* {user.result.firstname[0]} */}
-                                {/* {user.result.firstname[0]} */}
+                            <Avatar className={classes.purple} alt={user.result.name} src={user.result.picture}>
+                                {user.result.name.charAt(0)}
                             </Avatar>
-                            <Typography variant="h6" className={classes.username}>{user.token.name}</Typography>
+                            <Typography variant="h6" className={classes.username}>{user.result.name}</Typography>
                             <Button className={classes.logout} variant="contained" color="secondary" onClick={logOut}>Logout</Button>
                         </div>
                     ) : (

@@ -42,14 +42,13 @@ const Auth = () => {
 
 
     const googleSuccess = async (res) => {
-        console.log("res", res)
+
         try {
             const decode = jwt_decode(res.credential)
-            // console.log("decode=========", decode)
-            // dispatch({ type: 'Auth', data: { token: decode } });
-            // console.log("option", dispatch({ type: 'Auth', Data: { token: decode } }))
+            const result = res.credential;
+            console.log("result", result)
 
-            const setLocal = localStorage.setItem("profile", JSON.stringify({ token: decode }));
+            const setLocal = localStorage.setItem("profile", JSON.stringify({ result: decode, token: res.credential }));
             console.log("setLocal", setLocal)
             navigate("/");
         } catch (error) {
@@ -105,9 +104,10 @@ const Auth = () => {
                             )}
                             onSuccess={googleSuccess}
                             onFailure={googleFailure}
+                            cookiePolicy="single_host_origin"
                         />
 
-                        <Grid container justify="flex-end">
+                        <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Button onClick={switchMode}>
                                     {isSignup ? "Already have an account" : "Dont have an account"}?
@@ -122,3 +122,6 @@ const Auth = () => {
     );
 }
 export default Auth;
+
+
+// eyJhbGciOiJSUzI1NiIsImtpZCI6ImNhYWJmNjkwODE5MTYxNmE5MDhhMTM4OTIyMGE5NzViM2MwZmJjYTEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2NjI3Njg0MjUsImF1ZCI6IjEwOTg2Mzg5NDc5ODAtdjIwdjgzMjZ0Y2Q5Y3RkcmNqaHI5cjVuajYyNDA4ZmEuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTY1OTA3OTc2MDIyMTgwNTQxNzgiLCJlbWFpbCI6ImR1cm90ZW15QGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIxMDk4NjM4OTQ3OTgwLXYyMHY4MzI2dGNkOWN0ZHJjamhyOXI1bmo2MjQwOGZhLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwibmFtZSI6IkR1cm90ZW15IiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BRmRadWNvMDRLWEVBMHRvR0V0UHl6NFY0Tmx3MW9hbmVycGVqTEpVRktNY2lBPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6IkR1cm90ZW15IiwiaWF0IjoxNjYyNzY4NzI1LCJleHAiOjE2NjI3NzIzMjUsImp0aSI6IjMwZWZjZGY2NTEyNjBjMDA4YzY0NzY5ZjMyM2ZkOTZiOWI1OTczY2MifQ.RoVxslBH0p7IcGOVP8nItCucNYoCvc9yoYh7A3ftpKs_-jCHk0Kppk6IGKcdIu3pUs95z51-U8e3n7_HzPbAG4jrq1zI6vLdpnMToZ2a_TL5H_JXmsLgMtSUxNQ6n_IP1MXMTao0p5EEoHXXCs6CGvx79nXGTuddPcqz3BYWgFzvWY1c0ma2Ggy41UiFU8sk9cpvKHYnRpBsv40kEDC0h5ZuOlaazDYedwYanc1svyN3j0huL6xHCDQLGnV2U4ejMQJFAp8wrCDOpa5ObH6HuFWKa7UIN1WhHfuwQ5GDa8mSR_zPlELuSy_nXZiq2ExXR4aEiFKcOLJKai3Etk-yMQ"
