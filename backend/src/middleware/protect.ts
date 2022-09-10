@@ -13,7 +13,9 @@ export const Auth = (req: Request, res: Response, next: NextFunction) => {
     let decodedData: any;
     if (token && isCustomAuth) {
       decodedData = jwt.verify(token, "test");
-      req.userId = decodedData.id;
+      console.log("decodedData", decodedData);
+      req.userId = decodedData?.id;
+      console.log("req.userId", req.userId);
     } else {
       decodedData = jwt.decode(token);
       req.userId = decodedData?.sub;
@@ -22,4 +24,4 @@ export const Auth = (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     console.log(error);
   }
-};
+}; 

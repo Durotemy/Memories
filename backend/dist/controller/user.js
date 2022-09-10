@@ -51,13 +51,10 @@ const signup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const hashedPassword = yield bcrypt_1.default.hash(password, salt);
         const result = yield new user_1.default({
             name: `${firstname} ${lastname}`,
-            // firstname,
-            // lastname,
             email,
             password: hashedPassword,
             confirmPassword: hashedPassword,
         });
-        console.log("res", result);
         result.save();
         const token = jsonwebtoken_1.default.sign({ email: result.email, id: result._id }, "test", {
             expiresIn: "1h",

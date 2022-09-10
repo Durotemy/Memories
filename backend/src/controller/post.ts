@@ -41,7 +41,7 @@ export const updatePost = async (req: Request, res: Response) => {
       { ...post, _id },
       { new: true }
     );
-    console.log("updatedPost", updatedPost);
+
     res.status(200).json(updatedPost);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -53,7 +53,6 @@ export const deletePost = async (req: Request, res: Response) => {
     return res.status(404).send(`No post with id: ${_id}`);
   try {
     const deletedPost = await PostMessage.findByIdAndDelete(_id);
-    console.log("deletedPost", deletedPost);
     res.status(200).json(deletedPost);
   } catch (error: any) {
     res.status(500).json({ message: error });

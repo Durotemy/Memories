@@ -13,7 +13,9 @@ const Auth = (req, res, next) => {
         let decodedData;
         if (token && isCustomAuth) {
             decodedData = jsonwebtoken_1.default.verify(token, "test");
-            req.userId = decodedData.id;
+            console.log("decodedData", decodedData);
+            req.userId = decodedData === null || decodedData === void 0 ? void 0 : decodedData.id;
+            console.log("req.userId", req.userId);
         }
         else {
             decodedData = jsonwebtoken_1.default.decode(token);

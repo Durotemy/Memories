@@ -33,7 +33,6 @@ const createPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         res.status(201).json(newPost);
     }
     catch (error) {
-        console.log("hey", error);
         res.status(409).json({ message: error.message });
     }
 });
@@ -45,7 +44,6 @@ const updatePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(404).send(`No post with id: ${_id}`);
     try {
         const updatedPost = yield postMessage_1.default.findByIdAndUpdate(_id, Object.assign(Object.assign({}, post), { _id }), { new: true });
-        console.log("updatedPost", updatedPost);
         res.status(200).json(updatedPost);
     }
     catch (error) {
@@ -59,7 +57,6 @@ const deletePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(404).send(`No post with id: ${_id}`);
     try {
         const deletedPost = yield postMessage_1.default.findByIdAndDelete(_id);
-        console.log("deletedPost", deletedPost);
         res.status(200).json(deletedPost);
     }
     catch (error) {

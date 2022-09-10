@@ -32,12 +32,12 @@ const Form = ({ currentId, setCurrentId }) => {
         e.preventDefault();
         if (currentId === 0) {
             // dispatch(createPost(postData))
-            dispatch(createPost({ ...postData, name: user?.result?.firstname }))
+            dispatch(createPost({ ...postData, name: user?.result?.name }))
             // dispatch(updatePost(currentId, postData))
         }
         else {
             // dispatch(updatePost(currentId, postData))
-            dispatch(updatePost(currentId, { ...postData, firstname: user?.result?.firstname }))
+            dispatch(updatePost(currentId, { ...postData, firstname: user?.result?.name }))
 
             // dispatch(createPost(JSON.stringify(postData)))
         }
@@ -57,15 +57,15 @@ const Form = ({ currentId, setCurrentId }) => {
     }
 
 
-    // if (user?.token == null) {
-    //     return (
-    //         <Paper className={styles.paper}>
-    //             <Typography variant="h6" align="center">
-    //                 Please Sign In to create your own memories and like other's memories.
-    //             </Typography>
-    //         </Paper>
-    //     )
-    // }
+    if (!user?.result?.name) {
+        return (
+            <Paper className={styles.paper}>
+                <Typography variant="h6" align="center">
+                    Please Sign In to create your own memories and like other's memories.
+                </Typography>
+            </Paper>
+        )
+    }
 
 
 
