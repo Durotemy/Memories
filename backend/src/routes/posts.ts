@@ -2,6 +2,7 @@ import express from "express";
 import {
   createPosts,
   getPosts,
+  getPostsBySearch,
   updatePost,
   deletePost,
   likePost,
@@ -10,6 +11,7 @@ import { Auth } from "../middleware/protect";
 
 const router = express.Router();
 router.post("/createPost", Auth, createPosts);
+router.get("/search", getPostsBySearch);
 router.get("/", getPosts);
 router.patch("/:id", Auth, updatePost);
 router.delete("/:id", Auth, deletePost);

@@ -46,10 +46,10 @@ const Auth = () => {
         try {
             const decode = jwt_decode(res.credential)
             const result = res.credential;
-            console.log("result", result)
+          
 
-            const setLocal = localStorage.setItem("profile", JSON.stringify({ result: decode, token: res.credential }));
-            console.log("setLocal", setLocal)
+            localStorage.setItem("profile", JSON.stringify({ result: decode, token: res.credential }));
+          
             navigate("/");
         } catch (error) {
             console.log(error);

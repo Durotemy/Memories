@@ -10,7 +10,8 @@ import PostDetails from "./components/PostDetails/PostDetails";
 import { GoogleOAuthProvider } from "@react-oauth/google"
 function App() {
 
-  // const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   return (
     <GoogleOAuthProvider clientId="1098638947980-v20v8326tcd9ctdrcjhr9r5nj62408fa.apps.googleusercontent.com ">
       <Router>
@@ -22,6 +23,7 @@ function App() {
             <Route path="/posts/search" element={<Home />} />
             <Route path="/posts/:id" element={<PostDetails />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/auth" element={() => (!user ? <Auth /> : <Navigate to="/posts" />)} />
           </Routes>
         </Container >
       </Router>

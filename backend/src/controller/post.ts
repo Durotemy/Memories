@@ -1,12 +1,37 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
+import Post from "../model/postMessage";
 import PostMessage from "../model/postMessage";
 
 export const getPosts = async (req: Request, res: Response) => {
+  const { page } = req.query;
   try {
-    const postMessage = await PostMessage.find();
-
-    res.status(200).json(postMessage);
+    const Limit = 6;
+    const startIndex = (Number(page) - 1) * Limit;
+    const total = await PostMessage.countDocuments({});
+    const posts = await PostMessage.find()
+      .sort({ _id: -1 })
+      .limit(Limit)
+      .skip(startIndex);
+    res.status(200).json({
+      data: posts,
+      currentPage: Number(page),
+      numberOfPages: Math.ceil(total / Limit),
+    });
+  } catch (error: any) {
+    res.status(404).json({ message: error.message });
+  }
+};
+export const getPostsBySearch = async (req: Request, res: Response) => {
+  const { searchQuery, tags } = req.query;
+  try {
+    const title: any = new RegExp(searchQuery as string, "i");
+    const posts = await PostMessage.find({
+      $or: [{ title }],
+    });
+    // , { tags: { $in: tags?.toString().split(",") } }
+    res.json({ data: posts });
+    console.log("postfromBackend", posts);
   } catch (error: any) {
     res.status(404).json({ message: error.message });
   }

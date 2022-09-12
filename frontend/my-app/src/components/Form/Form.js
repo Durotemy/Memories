@@ -14,13 +14,11 @@ const Form = ({ currentId, setCurrentId }) => {
         selectedFile: '',
     })
 
-    const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null))
+    const  post   = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null))
     const styles = useStyle();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"));
 
-
-    // console.log("userIsHere ", user.token.name)
 
     useEffect(() => {
         if (post) {

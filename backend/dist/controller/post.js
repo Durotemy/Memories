@@ -12,19 +12,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.likePost = exports.deletePost = exports.updatePost = exports.createPosts = exports.getPosts = void 0;
+exports.likePost = exports.deletePost = exports.updatePost = exports.createPosts = exports.getPostsBySearch = exports.getPosts = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const postMessage_1 = __importDefault(require("../model/postMessage"));
 const getPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page } = req.query;
     try {
-        const postMessage = yield postMessage_1.default.find();
-        res.status(200).json(postMessage);
+        const Limit = 6;
+        const startIndex = (Number(page) - 1) * Limit;
+        const total = yield postMessage_1.default.countDocuments({});
+        const posts = yield postMessage_1.default.find()
+            .sort({ _id: -1 })
+            .limit(Limit)
+            .skip(startIndex);
+        res.status(200).json({
+            data: posts,
+            currentPage: Number(page),
+            numberOfPages: Math.ceil(total / Limit),
+        });
     }
     catch (error) {
         res.status(404).json({ message: error.message });
     }
 });
 exports.getPosts = getPosts;
+const getPostsBySearch = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { searchQuery, tags } = req.query;
+    try {
+        const title = new RegExp(searchQuery, "i");
+        const posts = yield postMessage_1.default.find({
+            $or: [{ title }],
+        });
+        // , { tags: { $in: tags?.toString().split(",") } }
+        res.json({ data: posts });
+        console.log("postfromBackend", posts);
+    }
+    catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
+exports.getPostsBySearch = getPostsBySearch;
 const createPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const post = req.body;
     const newPostMessage = new postMessage_1.default(Object.assign(Object.assign({}, post), { creator: req.userId, createdAt: new Date().toISOString() }));
