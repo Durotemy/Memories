@@ -13,8 +13,11 @@ const Form = ({ currentId, setCurrentId }) => {
         message: '',
         selectedFile: '',
     })
+    const d = useSelector((state) => state.posts.posts)
+    console.log("q", d)
+    const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
+    // const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null))
 
-    const  post   = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null))
     const styles = useStyle();
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem("profile"));
@@ -29,15 +32,10 @@ const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentId === 0) {
-            // dispatch(createPost(postData))
             dispatch(createPost({ ...postData, name: user?.result?.name }))
-            // dispatch(updatePost(currentId, postData))
         }
         else {
-            // dispatch(updatePost(currentId, postData))
             dispatch(updatePost(currentId, { ...postData, firstname: user?.result?.name }))
-
-            // dispatch(createPost(JSON.stringify(postData)))
         }
         clear()
     }
@@ -45,16 +43,11 @@ const Form = ({ currentId, setCurrentId }) => {
     let clear = () => {
         setCurrentId(0);
         setPostData({
-            // creator: '',
             title: '',
             message: '',
-            // tags: '',
             selectedFile: '',
-            // comments: []
         })
     }
-
-
     if (!user?.result?.name) {
         return (
             <Paper className={styles.paper}>
@@ -64,32 +57,16 @@ const Form = ({ currentId, setCurrentId }) => {
             </Paper>
         )
     }
-
-
-
     return (
-
         <Paper className={styles.paper}>
             <form autoComplete="off" noValidate className={`${styles.root} ${styles.form}`} onSubmit={handleSubmit}>
-                {/* <Typography variant="h5" component="h1" className={styles.title}>
-                    {currentId ? "Editing " : "Creating "}
-                    A memory
-                </Typography> */}
-                <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>
-                {/* <TextField name="creator"
-                    variant="outlined"
-                    label="creator"
-                    fullWidth
-                    value={postData.creator}
-                    onChange={(e) => setPostData({ ...postData, creator: e.target.value })}
-                /> */}
 
+                <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>
                 <TextField name="title"
                     variant="outlined"
                     label="title"
                     fullWidth
                     value={postData.title}
-
                     onChange={(e) => setPostData({ ...postData, title: e.target.value })}
                 />
                 <TextField name="message"
@@ -99,13 +76,6 @@ const Form = ({ currentId, setCurrentId }) => {
                     value={postData.message}
                     onChange={(e) => setPostData({ ...postData, message: e.target.value })}
                 />
-                {/* <TextField name="tags"
-                    variant="outlined"
-                    label="tags"
-                    fullWidth
-                    value={postData.tags}
-                    onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(",") })}
-                /> */}
                 <div className={styles.fileInput}>
                     <FileBase
                         type="file"

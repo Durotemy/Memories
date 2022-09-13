@@ -12,7 +12,6 @@ import useStyles from './styles';
 const Post = ({ post, setCurrentId }) => {
     const dispatch = useDispatch();
     const classes = useStyles();
-
     const user = JSON.parse(localStorage.getItem("profile"));
 
     return (
