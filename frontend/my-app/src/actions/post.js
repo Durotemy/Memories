@@ -1,23 +1,36 @@
 import * as api from "../api";
-import { FETCH_ALL, FETCH_BY_SEACH, START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from "../constant/actionTypes";
+import { FETCH_ALL, FETCH_BY_SEACH, FETCH_POST, START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from "../constant/actionTypes";
+
+
+export const getPost = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: START_LOADING });
+        const data  = await api.fetchPost(id);
+        console.log("infoData", data)
+        dispatch({ type: FETCH_POST, payload: data });
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+        console.log("error seen here", error)
+    }
+};
+
 
 export const getPosts = (page) => async (dispatch) => {
     try {
-        // dispatch({ type: START_LOADING });
+        dispatch({ type: START_LOADING });
         const { data } = await api.fetchPosts(page);
-        console.log("datum", data);
         dispatch({ type: FETCH_ALL, payload: data });
-        // dispatch({ type: END_LOADING });
+        dispatch({ type: END_LOADING });
     } catch (error) {
         console.log(error)
     }
 };
 export const getPostBySearch = (searchQuery) => async (dispatch) => {
     try {
-        // dispatch({ type: START_LOADING });
+        dispatch({ type: START_LOADING });
         const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
         dispatch({ type: FETCH_BY_SEACH, payload: data });
-        // dispatch({ type: END_LOADING });
+        dispatch({ type: END_LOADING });
     } catch (error) {
         console.log(error.message);
     }

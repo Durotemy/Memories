@@ -13,8 +13,6 @@ const Form = ({ currentId, setCurrentId }) => {
         message: '',
         selectedFile: '',
     })
-    const d = useSelector((state) => state.posts.posts)
-    console.log("q", d)
     const post = useSelector((state) => currentId ? state.posts.posts.find((p) => p._id === currentId) : null);
     // const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null))
 
@@ -58,7 +56,7 @@ const Form = ({ currentId, setCurrentId }) => {
         )
     }
     return (
-        <Paper className={styles.paper}>
+        <Paper className={styles.paper} elevation={6}>
             <form autoComplete="off" noValidate className={`${styles.root} ${styles.form}`} onSubmit={handleSubmit}>
 
                 <Typography variant="h6">{currentId ? `Editing "${post.title}"` : 'Creating a Memory'}</Typography>

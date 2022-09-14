@@ -9,6 +9,7 @@ const protect_1 = require("../middleware/protect");
 const router = express_1.default.Router();
 router.post("/createPost", protect_1.Auth, post_1.createPosts);
 router.get("/search", post_1.getPostsBySearch);
+router.get("/:id", post_1.getPost);
 router.get("/", post_1.getPosts);
 router.patch("/:id", protect_1.Auth, post_1.updatePost);
 router.delete("/:id", protect_1.Auth, post_1.deletePost);

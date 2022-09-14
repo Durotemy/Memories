@@ -6,10 +6,12 @@ import useStyle from './styles';
 
 const Posts = ({ setCurrentId }) => {
     const { posts, isLoading } = useSelector((state) => state.posts)
+    console.log(`Loading ${isLoading}`)
     const classes = useStyle();
 
-
-    if (!posts.length) return 'No posts';
+    if (!posts.length) {
+        return "No post to display"
+    }
     return (
         !isLoading ? <CircularProgress /> : (
             <div styles={{ padding: '10px' }}>

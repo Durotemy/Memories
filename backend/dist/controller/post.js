@@ -12,9 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.likePost = exports.deletePost = exports.updatePost = exports.createPosts = exports.getPostsBySearch = exports.getPosts = void 0;
+exports.likePost = exports.deletePost = exports.updatePost = exports.createPosts = exports.getPostsBySearch = exports.getPosts = exports.getPost = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const postMessage_1 = __importDefault(require("../model/postMessage"));
+const getPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        const post = yield postMessage_1.default.findById(id);
+        res.status(200).json(post);
+    }
+    catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+});
+exports.getPost = getPost;
 const getPosts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page } = req.query;
     try {

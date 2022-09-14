@@ -75,7 +75,7 @@ const Home = () => {
                         </AppBar>
 
                         <Form currentId={currentId} setCurrentId={setCurrentId} />
-                        {(!searchQuery && !tags.length) && (
+                        {(!searchQuery ) && (
                             <Paper elevation={6} className={classes.pagination}>
                                 <Pagination page={page} />
                             </Paper>
