@@ -17,7 +17,7 @@ const Post = ({ post, setCurrentId }) => {
     const user = JSON.parse(localStorage.getItem("profile"));
 
     const openPost = () => {
-        navigate(`/posts/${post._id}`)
+        navigate(`/post/${post._id}`)
     }
 
     return (

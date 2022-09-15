@@ -3,10 +3,11 @@ import { FETCH_ALL, FETCH_BY_SEACH, FETCH_POST, START_LOADING, END_LOADING, CREA
 
 
 export const getPost = (id) => async (dispatch) => {
+    console.log("getPost");
     try {
         dispatch({ type: START_LOADING });
-        const data  = await api.fetchPost(id);
-        console.log("infoData", data)
+        console.log("id", id)
+        const  data  = await api.fetchPost(id);
         dispatch({ type: FETCH_POST, payload: data });
         dispatch({ type: END_LOADING });
     } catch (error) {

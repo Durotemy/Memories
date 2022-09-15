@@ -17,12 +17,14 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const postMessage_1 = __importDefault(require("../model/postMessage"));
 const getPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
+    // try {
     try {
         const post = yield postMessage_1.default.findById(id);
         res.status(200).json(post);
+        console.log("post from backend", post);
     }
     catch (error) {
-        res.status(404).json({ message: error.message });
+        console.log("eeee", error);
     }
 });
 exports.getPost = getPost;

@@ -13,7 +13,7 @@ export default (state = { isLoading: true, posts: [] }, action) => {
                 numberOfPages: action.payload.numberOfPages
             }
         case FETCH_POST:
-            return { ...state, post: action.payload.post }; 
+            return { ...state, post: action.payload.data };
         case FETCH_BY_SEACH:
             return {
                 ...state,
