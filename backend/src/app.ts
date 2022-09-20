@@ -32,6 +32,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use("/post", posts);
 app.use("/user", users);
+app.get("/", (req, res) => {
+  res.send("app is running");
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
