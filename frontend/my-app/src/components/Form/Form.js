@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Paper } from "@material-ui/core"
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from "../../actions/post";
-
+import { useNavigate } from "react-router-dom"
 
 const Form = ({ currentId, setCurrentId }) => {
 
@@ -18,6 +18,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
     const styles = useStyle();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("profile"));
 
 
@@ -30,10 +31,12 @@ const Form = ({ currentId, setCurrentId }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentId === 0) {
-            dispatch(createPost({ ...postData, name: user?.result?.name }))
+            dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
+            navigate("/posts");
         }
         else {
             dispatch(updatePost(currentId, { ...postData, firstname: user?.result?.name }))
+
         }
         clear()
     }
@@ -46,11 +49,11 @@ const Form = ({ currentId, setCurrentId }) => {
             selectedFile: '',
         })
     }
-    if (!user?.result?.name) {
+    if (user?.result?.name == null) {
         return (
             <Paper className={styles.paper}>
                 <Typography variant="h6" align="center">
-                    Please Sign In to create your own memories and like other's memories.
+                    Please Sign In to create your own memories.
                 </Typography>
             </Paper>
         )
@@ -70,6 +73,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 <TextField name="message"
                     variant="outlined"
                     label="message"
+                    rows={5}
                     fullWidth
                     value={postData.message}
                     onChange={(e) => setPostData({ ...postData, message: e.target.value })}

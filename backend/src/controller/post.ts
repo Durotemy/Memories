@@ -116,4 +116,27 @@ export const likePost = async (req: Request, res: Response) => {
   });
   res.status(200).json(updatedPost);
 };
-export default { createPosts, getPosts, updatePost, deletePost, likePost };
+
+export const commentPost = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { value } = req.body;
+  try {
+    const post: any = await PostMessage.findById(id);
+    post.comments.push(value);
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, {
+      new: true,
+    });
+    res.status(200).json(updatedPost);
+  } catch (error: any) {
+    res.status(500).json({ message: error });
+  }
+};
+
+export default {
+  createPosts,
+  getPosts,
+  updatePost,
+  deletePost,
+  likePost,
+  commentPost,
+};

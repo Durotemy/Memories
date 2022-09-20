@@ -7,6 +7,7 @@ import {
   deletePost,
   getPost,
   likePost,
+  commentPost,
 } from "../controller/post";
 import { Auth } from "../middleware/protect";
 
@@ -18,5 +19,6 @@ router.get("/", getPosts);
 router.patch("/:id", Auth, updatePost);
 router.delete("/:id", Auth, deletePost);
 router.patch("/:id/likePost", Auth, likePost);
+router.post("/:id/commentPost", Auth, commentPost)
 
 export default router;

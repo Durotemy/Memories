@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.likePost = exports.deletePost = exports.updatePost = exports.createPosts = exports.getPostsBySearch = exports.getPosts = exports.getPost = void 0;
+exports.commentPost = exports.likePost = exports.deletePost = exports.updatePost = exports.createPosts = exports.getPostsBySearch = exports.getPosts = exports.getPost = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const postMessage_1 = __importDefault(require("../model/postMessage"));
 const getPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -124,4 +124,27 @@ const likePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.status(200).json(updatedPost);
 });
 exports.likePost = likePost;
-exports.default = { createPosts: exports.createPosts, getPosts: exports.getPosts, updatePost: exports.updatePost, deletePost: exports.deletePost, likePost: exports.likePost };
+const commentPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { value } = req.body;
+    try {
+        const post = yield postMessage_1.default.findById(id);
+        post.comments.push(value);
+        const updatedPost = yield postMessage_1.default.findByIdAndUpdate(id, post, {
+            new: true,
+        });
+        res.status(200).json(updatedPost);
+    }
+    catch (error) {
+        res.status(500).json({ message: error });
+    }
+});
+exports.commentPost = commentPost;
+exports.default = {
+    createPosts: exports.createPosts,
+    getPosts: exports.getPosts,
+    updatePost: exports.updatePost,
+    deletePost: exports.deletePost,
+    likePost: exports.likePost,
+    commentPost: exports.commentPost,
+};

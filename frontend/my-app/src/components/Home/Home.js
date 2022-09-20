@@ -62,7 +62,7 @@ const Home = () => {
                                 onChange={(e) => setSearch(e.target.value)}
                                 onKeyPress={handleKeyPress}
                             />
-                            <ChipInput
+                            {/* <ChipInput
                                 style={{ margin: '10px 0' }}
                                 value={tags}
                                 onAdd={handleAdd}
@@ -70,7 +70,7 @@ const Home = () => {
                                 label="Search Tags"
                                 variant="outlined"
                                 color="primary"
-                            />
+                            /> */}
                             <Button onClick={searchPost} className={classes.searchButton} color='primary' variant="contained">Search</Button>
                         </AppBar>
 

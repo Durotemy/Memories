@@ -5,6 +5,8 @@ interface post {
   name: string;
   creator: string;
   selectedFile: string;
+  comments: string[];
+   
 
   likes: {
     type: [string];
@@ -36,6 +38,11 @@ const postSchema = new mongoose.Schema<post>({
     // required: true,
   },
   likes: {
+    type: [String],
+    default: [],
+  },
+
+  comments: {
     type: [String],
     default: [],
   },

@@ -14,4 +14,5 @@ router.get("/", post_1.getPosts);
 router.patch("/:id", protect_1.Auth, post_1.updatePost);
 router.delete("/:id", protect_1.Auth, post_1.deletePost);
 router.patch("/:id/likePost", protect_1.Auth, post_1.likePost);
+router.post("/:id/commentPost", protect_1.Auth, post_1.commentPost);
 exports.default = router;
