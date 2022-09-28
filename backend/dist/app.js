@@ -38,6 +38,7 @@ app.get("/", (req, res) => {
 app.use(function (req, res, next) {
     next(createError(404));
 });
-console.log(`server is running on ${process.env.PORT}`);
+const port = process.env.PORT || 1337;
+console.log(`server is running on ${port}`);
 // error handler
 module.exports = app;
