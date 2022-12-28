@@ -8,12 +8,12 @@ import logger from "morgan";
 import bodyParser from "body-parser";
 import connectDB from "./config/db";
 
+const app = express();
 dotenv.config();
 connectDB();
 
 import posts from "./routes/posts.js";
 import users from "./routes/users.js";
-var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -31,7 +31,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use("/post", posts);
-console.log("post",posts);
 app.use("/user", users);
 app.get("/", (req, res) => {
   res.send("app is running");
@@ -41,8 +40,18 @@ app.get("/", (req, res) => {
 app.use(function (req, res, next) {
   next(createError(404));
 });
-const port = process.env.PORT || 1337;
-console.log(`server is running on ${port}`);
+// const port = process.env.PORT 
+// console.log
+// const port:any =  6000;
+// console.log("",port)
+
+// console.log(`my server is running on port: ${port}`);
+// app.listen("port", port)
 // error handler
 
 module.exports = app;
+
+
+
+
+

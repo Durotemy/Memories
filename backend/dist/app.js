@@ -12,11 +12,11 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const morgan_1 = __importDefault(require("morgan"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const db_1 = __importDefault(require("./config/db"));
+const app = (0, express_1.default)();
 dotenv_1.default.config();
 (0, db_1.default)();
 const posts_js_1 = __importDefault(require("./routes/posts.js"));
 const users_js_1 = __importDefault(require("./routes/users.js"));
-var app = (0, express_1.default)();
 // view engine setup
 app.set("views", path_1.default.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -30,7 +30,6 @@ app.use(body_parser_1.default.urlencoded({ extended: true })); // for parsing ap
 app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
 app.use((0, cors_1.default)());
 app.use("/post", posts_js_1.default);
-console.log("post", posts_js_1.default);
 app.use("/user", users_js_1.default);
 app.get("/", (req, res) => {
     res.send("app is running");
@@ -39,7 +38,11 @@ app.get("/", (req, res) => {
 app.use(function (req, res, next) {
     next(createError(404));
 });
-const port = process.env.PORT || 1337;
-console.log(`server is running on ${port}`);
+// const port = process.env.PORT 
+// console.log
+// const port:any =  6000;
+// console.log("",port)
+// console.log(`my server is running on port: ${port}`);
+// app.listen("port", port)
 // error handler
 module.exports = app;
