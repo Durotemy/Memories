@@ -30,6 +30,7 @@ app.use(body_parser_1.default.urlencoded({ extended: true })); // for parsing ap
 app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
 app.use((0, cors_1.default)());
 app.use("/post", posts_js_1.default);
+console.log("post", posts_js_1.default);
 app.use("/user", users_js_1.default);
 app.get("/", (req, res) => {
     res.send("app is running");

@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use("/post", posts);
+console.log("post",posts);
 app.use("/user", users);
 app.get("/", (req, res) => {
   res.send("app is running");

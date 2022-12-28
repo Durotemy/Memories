@@ -10,7 +10,7 @@ const Posts = ({ setCurrentId }) => {
     const classes = useStyle();
 
     if (!posts.length) {
-        return "post is loading"
+        return <CircularProgress/>
     }
     return (
         !isLoading ? <CircularProgress /> : (

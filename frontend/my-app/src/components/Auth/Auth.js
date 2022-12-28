@@ -90,7 +90,7 @@ const Auth = () => {
                         <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
                             {isSignup ? "Sign up" : "Sign in"}
                         </Button>
-                        <GoogleLogin
+                        {/* <GoogleLogin
                             render={(renderProps) => (
                                 <Button color="primary"
                                     className={classes.googleButton}
@@ -105,7 +105,7 @@ const Auth = () => {
                             onSuccess={googleSuccess}
                             onFailure={googleFailure}
                             cookiePolicy="single_host_origin"
-                        />
+                        /> */}
 
                         <Grid container justifyContent="flex-end">
                             <Grid item>

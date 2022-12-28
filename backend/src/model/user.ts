@@ -6,6 +6,7 @@ type user = {
   password: string;
   confirmPassword: string;
   name: string;
+  timestamps: boolean;
 };
 
 const userSchema = new mongoose.Schema<user>({
@@ -15,6 +16,7 @@ const userSchema = new mongoose.Schema<user>({
   password: { required: true, type: String },
   confirmPassword: { type: String },
   name: { type: String },
+  timestamps: true,
 });
 
 const User = mongoose.model("userSchema", userSchema);
