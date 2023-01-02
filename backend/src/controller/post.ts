@@ -5,7 +5,6 @@ import PostMessage from "../model/postMessage";
 
 export const getPost = async (req: Request, res: Response) => {
   const { id } = req.params;
-  // try {
   try {
     const post = await PostMessage.findById(id);
     res.status(200).json(post);
