@@ -4,7 +4,6 @@ import Post from "../model/postMessage";
 import PostMessage from "../model/postMessage";
 
 export const getPost = async (req: Request, res: Response) => {
-  // get a single post
   const { id } = req.params;
   try {
     const post = await PostMessage.findById(id);

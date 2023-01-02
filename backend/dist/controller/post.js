@@ -16,7 +16,6 @@ exports.commentPost = exports.likePost = exports.deletePost = exports.updatePost
 const mongoose_1 = __importDefault(require("mongoose"));
 const postMessage_1 = __importDefault(require("../model/postMessage"));
 const getPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // get a single post
     const { id } = req.params;
     try {
         const post = yield postMessage_1.default.findById(id);
