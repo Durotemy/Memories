@@ -2,7 +2,7 @@
   "name": "memories",
   "scripts": {
     "start": "node ./backend/bin/www",
-    "dev": "nodemon ./bin/www",
+    "dev": "nodemon ./backend/bin/www",
     "postinstall": "tsc"
   },
   "dependencies": {
